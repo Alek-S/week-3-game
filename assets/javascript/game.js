@@ -73,7 +73,8 @@ var game = {
 // END OF GLOBAL VARAIBLES//
 
 
-//END OF MAIN KEY PRESS FUNCTION//
+//START OF MAIN KEY PRESS FUNCTION//
+
 // Wait for keyboard key to be pressed
 document.onkeyup = function(event){
 
