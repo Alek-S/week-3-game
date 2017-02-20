@@ -1,4 +1,4 @@
-// GLOBAL VARAIBLES//
+//==GLOBAL VARAIBLES==//
 var wordDiv = ''; //for what is shown on screen for word div element with <span id=[number]></span> - when doing inner html
 var attempts = 5; //how many attempts does player get to guess. Use inside game object. 
 
@@ -7,12 +7,12 @@ var game = {
 	remaining: attempts, //remaining attempts
 	guessedWrong: [], //guessed letters that were wrong
 	guessedRight: [], //guessed letters that were correct
-	current: null,	
+	current: null, //current languageList object being played	
 	languageList: [
-		{word:'applescript', logoLocation:"assets/images/applescript.png", uniqueLetters:9},
-		{word:'clojure', logoLocation:"assets/images/clojure.png", uniqueLetters:7},
-		{word:'elixir', logoLocation:"assets/images/elixir.png", uniqueLetters:5},
-		{word:'erlang', logoLocation:"assets/images/erlang.png", uniqueLetters:6},
+		{word:'applescript', logoLocation:"assets/images/applescript.png"},
+		{word:'clojure', logoLocation:"assets/images/clojure.png"},
+		{word:'elixir', logoLocation:"assets/images/elixir.png"},
+		{word:'erlang', logoLocation:"assets/images/erlang.png"},
 		{word:'hack', logoLocation:"assets/images/hack.png"},
 		{word:'haskell', logoLocation:"assets/images/haskell.png"},
 		{word:'java', logoLocation:"assets/images/java.png"},
@@ -70,10 +70,10 @@ var game = {
 		document.getElementById('guessedLetters').innerHTML = ' '; //clear wrong guesses
 	}
 };
-// END OF GLOBAL VARAIBLES//
+//==END OF GLOBAL VARAIBLES==//
 
 
-//START OF MAIN KEY PRESS FUNCTION//
+//==START OF MAIN KEY PRESS FUNCTION==//
 
 // Wait for keyboard key to be pressed
 document.onkeyup = function(event){
@@ -137,10 +137,10 @@ document.onkeyup = function(event){
 			game.newGame();
 	}
 }  
-//END OF MAIN KEY PRESS FUNCTION//
+//==END OF MAIN KEY PRESS FUNCTION==//
 
 
-//ADDITONAL FUNCTIONS//
+//==START OF ADDITONAL FUNCTIONS==//
 
 //what to do when player enters incorrect letter
 function incorrect(letter){
