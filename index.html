@@ -6,12 +6,15 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css"> 
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+	<!-- external Google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Raleway:300,400,400i,500" rel="stylesheet">
+
 </head>
 <body>
 
 	<header>
 		<h1>Hangman</h1>
-		<p>Programming Language Edition</p>
+		<h2>Programming Language Edition</h2>
 	</header>
 
 	<div id="logo">
@@ -19,24 +22,41 @@
 
 	<div id="gameArea">
 		
-		<div id="score"> <!-- player current wins -->
-			<p>
-				Current Score is: <span id="scoreNumber"></span> 
-			</p>
-			<p>Press any key to get started!</p> 
-		</div> 
-
-		<div id="image"></div> <!-- image hint of what word is -->
+		<p id='anykey'>Press any key to get started!</p>
 		
-		<div id="word"></div> <!-- the word player is trying to guess -->
+		<div id='leftCol'>
+			<div id="score"> <!-- player current wins -->
+				<p>
+					Current Score is: <span id="scoreNumber"></span> 
+				</p>
+			</div> 
 
-		<div id="guessesRemaining"> <!-- number of guesses players has left -->
-			Failed Attempts Remaining: <span id='remaining'></span>
+			<div id="image"></div> <!-- image hint of what word is -->
 		</div>
 
-		<div id="guessedLetters"></div> <!-- Letters letters the player has already guessed -->
+		<div id='rightCol'>
+			<div id="word"></div> <!-- the word player is trying to guess -->
 
+			<div id="guessesRemaining"> <!-- number of guesses players has left -->
+				Fail Attempts Remaining: <span id='remaining'></span>
+			</div>
+
+			<div id="guessedLetters"></div> <!-- Letters letters the player has already guessed -->
+		</div>
 	</div>
+
+	<footer>
+		
+		<p>How to Play:</p>
+			<li>Try to guess programming language using the logo as a hint</li>
+			<li>If word completed then game moves to next round, press any key to start the round</li>
+			<li>If you run out of guesses, round is lost</li>
+		
+		<br>
+		<p>Scoring:</p>
+		<p>Get 1 point per letter of the word, and 10 points for completing the whole word</p>
+		
+	</footer>
 
 <script src="assets/javascript/game.js"></script>
 </body>
