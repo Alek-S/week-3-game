@@ -2,9 +2,10 @@
 var wordDiv = ''; //for what is shown on screen for word div
 
 var game = {
-	score: 0, // player score  - 1 point per letter, 10 points for getting word, keep tracking until out of remaining
-	remaining: 5, //remaining attempts
-	guessedList: [], //guessed letters that were wrong
+	score: 0, // player score: 1 point per letter, 10 points for getting word, keep tracking until out of remaining
+	remaining: 6, //remaining attempts
+	guessedWrong: [], //guessed letters that were wrong
+	guessedRight: [], //guessed letters that were correct
 	current: null,	
 	languageList: [
 		{word:'applescript', logoLocation:"assets/images/applescript.png"},
@@ -30,7 +31,7 @@ var game = {
 			this.score = 0;
 		} else if( variable === 'remaining'){
 			this.remaining = 5;
-		} else if( variable === 'guessedList'){
+		} else if( variable === 'guessedWrong'){
 			this.guessedList = [];
 		} else if (variable === 'current'){
 			this.current = null;		
@@ -53,6 +54,10 @@ var game = {
 // Wait for keyboard key to be pressed
 document.onkeyup = function(event){
 
+	//convert key player pressed to lower case so not case sensitive
+	var playerGuess = event.key.toLowerCase();
+	console.log('Pressed: ' + playerGuess);
+
 	//if no current word
 	if(game.current === null){
 		// random generate number between 0 and 16, use as index from game.languageList, assign it to game.current
@@ -67,11 +72,16 @@ document.onkeyup = function(event){
 			wordDiv = wordDiv + '<span id="'+ i + '">'  +'_ ' + '</span>';
 		}
 		console.log(wordDiv);
+
+		//populate word Div element
+		document.getElementById('word').innerHTML = wordDiv;
 	}
 
-	//convert key player pressed to lower case so not case sensitive
-	var playerGuess = event.key.toLowerCase();
-	console.log('Pressed: ' + playerGuess);
+	//display score
+	document.getElementById('scoreNumber').innerHTML = game.score
+
+	//display remaing number guesses on site
+	document.getElementById('remaining').innerHTML = game.remaining
 
 	// if game is not over
 	if( game.remaining > 0 ){
@@ -83,25 +93,27 @@ document.onkeyup = function(event){
 		} else if( game.current.word.indexOf(playerGuess) !== -1){
 			//guessed correct
 			console.log("Player guess correct");
-
+			correct(playerGuess);
 		}
 	} else {
 		//game over
-	}
 
-	//populate word Div element
-	document.getElementById('word').innerHTML = wordDiv;
+		//prompt game over, and their final score. on newline - Press okay to play again.
+
+		//if they pressed okay
+			//reset eveything
+	}
 }
 
 
 function incorrect(letter){
 	//if not guessed
-	if( game.guessedList.indexOf(letter) === -1 ){
+	if( game.guessedWrong.indexOf(letter) === -1 ){
 		// add letter to guessed List array
-		game.guessedList.push(letter);
+		game.guessedWrong.push(letter);
 		
 		// update display in guessedLetters section of the website
-		document.getElementById('guessedLetters').innerHTML = game.guessedList
+		document.getElementById('guessedLetters').innerHTML = game.guessedWrong
 		
 		// reduce remaining guesses by one
 		game.remaining--;
@@ -114,5 +126,22 @@ function incorrect(letter){
 
 function correct(letter){
 
+	//loop through every index of game.current.word
+	for(var i=0; i < game.current.word.length; i++){
+
+		//if letter is equal to current index of game.current.word
+		if( letter === game.current.word[i]){
+			//update document.getElementById(i).innerHTML for those indexes with letter
+			document.getElementById(i).innerHTML = letter + ' ';
+		}
+	}
+
+	//if letter not played yet
+	if(game.guessedRight.indexOf(letter) === -1){
+		//add to score
+		game.score++
+		//display score
+		document.getElementById('scoreNumber').innerHTML = game.score
+	}
 }
 
