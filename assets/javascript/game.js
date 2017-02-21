@@ -82,6 +82,9 @@ document.onkeyup = function(event){
 	var playerGuess = event.key.toLowerCase();
 	console.log('Pressed: ' + playerGuess);
 
+	//display score
+	document.getElementById('scoreNumber').innerHTML = game.score
+
 	//if no current word
 	if(game.current === null){
 		// random generate number between 0 and 16, use as index from game.languageList, assign it to game.current
@@ -100,9 +103,6 @@ document.onkeyup = function(event){
 		//populate word Div element
 		document.getElementById('word').innerHTML = wordDiv;
 	}
-
-	//display score
-	document.getElementById('scoreNumber').innerHTML = game.score
 
 	//display remaing number guesses on site
 	document.getElementById('remaining').innerHTML = game.remaining
@@ -171,20 +171,22 @@ function correct(letter){
 			
 			//update document.getElementById(i).innerHTML for those indexes with letter
 			document.getElementById(i).innerHTML = letter + ' ';
+
 			
-			//add to score
-			game.score++
-			
-			//add to guessedRight array
-			game.guessedRight.push(letter);
-			console.log(game.guessedRight);
+			//if not in gueesed array
+			if(game.guessedRight.indexOf(letter) === -1){
+
+				// add to guessedRight array
+				game.guessedRight.push(letter);
+				console.log(game.guessedRight);
+				//add to score
+				game.score++
+			}
 		}
 	}
-
-	//if letter not played yet
-	if(game.guessedRight.indexOf(letter) === -1){
-		//display score
-		document.getElementById('scoreNumber').innerHTML = game.score
-	}
+	
+	//update display score
+	document.getElementById('scoreNumber').innerHTML = game.score
+	
 }
 

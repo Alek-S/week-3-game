@@ -19,6 +19,7 @@ h1{
 h2{
 	font-size: 1.3em;
 	text-align: center;
+	font-style: italic;
 }
 #gameArea{
 	display: inline-block;
@@ -48,21 +49,21 @@ h2{
 
 #leftCol{
 	width: 35%;
-	border: 1px solid #bfbfbf;
+	border: 1px solid #cccccc;
 	border-radius: 4px;
 	margin-bottom: 10px;
 	float: left;
 	margin-left: 10%;
-	padding: 5px;
+	padding: 10px;
 	background-color: #ffffff;
 }
 #rightCol{
 	width: 35%;
-	border: 1px solid #bfbfbf;
+	border: 1px solid #cccccc;
 	border-radius: 4px;
 	float: right;
 	margin-right: 10%;
-	padding: 5px;
+	padding: 10px;
 	background-color: #ffffff;
 }
 footer{
@@ -72,12 +73,23 @@ footer{
 	padding: 5px;
 	color: #737373;
 	font-family: 'Raleway', sans-serif;
-	line-height: 125%;
+	line-height: 130%;
 	font-size: .8em;
 
 }
-#word, #guessesRemaining, #guessedLetters{
-	width: 90%;
-    margin: auto;
+#score{
+	margin-bottom: 10px;
+}
+#word{
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	text-align: center;
+}
+span{
+	color: #88cc00;
+}
+#guessedLetters{
+	text-align: center;
+	margin-top: 5px;
 }
 
