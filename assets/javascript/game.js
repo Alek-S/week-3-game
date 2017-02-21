@@ -73,8 +73,8 @@ var game = {
 //==END OF GLOBAL VARAIBLES==//
 
 
-//==START OF MAIN KEY PRESS FUNCTION==//
 
+//==START OF MAIN KEY PRESS FUNCTION==//
 // Wait for keyboard key to be pressed
 document.onkeyup = function(event){
 
@@ -120,7 +120,7 @@ document.onkeyup = function(event){
 			correct(playerGuess);
 
 			//if guessed all the letters
-			if(game.guessedRight.length === game.current.word.length){
+			if(game.guessedRight.length >= game.current.word.length){
 				
 				//add 10 to score
 				game.score = game.score +10
@@ -140,8 +140,8 @@ document.onkeyup = function(event){
 //==END OF MAIN KEY PRESS FUNCTION==//
 
 
-//==START OF ADDITONAL FUNCTIONS==//
 
+//==START OF ADDITONAL FUNCTIONS==//
 //what to do when player enters incorrect letter
 function incorrect(letter){
 	//if not guessed already
@@ -163,18 +163,18 @@ function incorrect(letter){
 //what to do when player enters correct letter
 function correct(letter){
 
-	//loop through every index of game.current.word
-	for(var i=0; i < game.current.word.length; i++){
+	//if not already guessed
+	if(game.guessedRight.indexOf(letter) === -1){
 
-		//if letter is equal to current index of game.current.word
-		if( letter === game.current.word[i]){
-			
-			//update document.getElementById(i).innerHTML for those indexes with letter
-			document.getElementById(i).innerHTML = letter + ' ';
+		//loop through every index of game.current.word
+		for(var i=0; i < game.current.word.length; i++){
 
-			
-			//if not in gueesed array
-			if(game.guessedRight.indexOf(letter) === -1){
+			//if letter is equal to current index of game.current.word
+			if( letter === game.current.word[i]){
+				
+				//update document.getElementById(i).innerHTML for those indexes with letter
+				document.getElementById(i).innerHTML = letter + ' ';
+
 
 				// add to guessedRight array
 				game.guessedRight.push(letter);
@@ -183,7 +183,7 @@ function correct(letter){
 				game.score++
 			}
 		}
-	}
+	}	
 	
 	//update display score
 	document.getElementById('scoreNumber').innerHTML = game.score
