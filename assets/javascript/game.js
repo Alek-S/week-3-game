@@ -53,6 +53,7 @@ var game = {
 		this.reset('all');
 		document.getElementById('image').innerHTML = ''; //clear image
 		document.getElementById('word').innerHTML = ''; //clear guesses
+		wordDiv = ''; //clear variable holding the guesses
 		document.getElementById('scoreNumber').innerHTML = ''; //clear score
 		document.getElementById('remaining').innerHTML = ''; //clear remaining attempt number
 		document.getElementById('guessedLetters').innerHTML = ''; //clear wrong guesses
@@ -68,10 +69,10 @@ var game = {
 		wordDiv = ''; //clear variable holding the guesses
 		document.getElementById('remaining').innerHTML = ' '; //clear remaining attempt number
 		document.getElementById('guessedLetters').innerHTML = ' '; //clear wrong guesses
+		//!!FINISH THIS!! - add code to start up on a new word, take it from document.onkeyup function
 	}
 };
 //==END OF GLOBAL VARAIBLES==//
-
 
 
 //==START OF MAIN KEY PRESS FUNCTION==//
@@ -85,7 +86,7 @@ document.onkeyup = function(event){
 	//display score
 	document.getElementById('scoreNumber').innerHTML = game.score
 
-	//if no current word
+	//if no current word...
 	if(game.current === null){
 		// random generate number between 0 and 16, use as index from game.languageList, assign it to game.current
 		game.current =  game.languageList[ Math.floor(Math.random() * 17) ];
@@ -98,7 +99,6 @@ document.onkeyup = function(event){
 		for(var i= 0; i< game.current.word.length; i++){
 			wordDiv = wordDiv + '<span id="'+ i + '">'  +'_ ' + '</span>';
 		}
-		console.log(wordDiv);
 
 		//populate word Div element
 		document.getElementById('word').innerHTML = wordDiv;
@@ -107,7 +107,7 @@ document.onkeyup = function(event){
 	//display remaing number guesses on site
 	document.getElementById('remaining').innerHTML = game.remaining
 
-	// if still have remaining guesses
+	// if still have remaining guesses...
 	if( game.remaining > 0 ){
 		if( game.current.word.indexOf(playerGuess) === -1 ){
 			//guessed incorrect
@@ -119,7 +119,7 @@ document.onkeyup = function(event){
 			console.log("Player guess correct");
 			correct(playerGuess);
 
-			//if guessed all the letters
+			//if guessed all the letters...
 			if(game.guessedRight.length >= game.current.word.length){
 				
 				//add 10 to score
@@ -140,11 +140,11 @@ document.onkeyup = function(event){
 //==END OF MAIN KEY PRESS FUNCTION==//
 
 
-
 //==START OF ADDITONAL FUNCTIONS==//
 //what to do when player enters incorrect letter
 function incorrect(letter){
-	//if not guessed already
+
+	//if not guessed already...
 	if( game.guessedWrong.indexOf(letter) === -1 ){
 		// add letter to guessed List array
 		game.guessedWrong.push(letter);
@@ -163,7 +163,7 @@ function incorrect(letter){
 //what to do when player enters correct letter
 function correct(letter){
 
-	//if not already guessed
+	//if not already guessed...
 	if(game.guessedRight.indexOf(letter) === -1){
 
 		//loop through every index of game.current.word
@@ -175,7 +175,6 @@ function correct(letter){
 				//update document.getElementById(i).innerHTML for those indexes with letter
 				document.getElementById(i).innerHTML = letter + ' ';
 
-
 				// add to guessedRight array
 				game.guessedRight.push(letter);
 				console.log(game.guessedRight);
@@ -184,9 +183,6 @@ function correct(letter){
 			}
 		}
 	}	
-	
 	//update display score
-	document.getElementById('scoreNumber').innerHTML = game.score
-	
+	document.getElementById('scoreNumber').innerHTML = game.score	
 }
-
