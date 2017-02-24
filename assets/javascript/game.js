@@ -7,7 +7,7 @@ var game = {
 	remaining: attempts, //remaining attempts
 	guessedWrong: [], //guessed letters that were wrong
 	guessedRight: [], //guessed letters that were correct
-	current: null, //current languageList object being played	
+	current: null, //current languageList object being played
 	languageList: [
 		{word:'applescript', logoLocation:"assets/images/applescript.png"},
 		{word:'clojure', logoLocation:"assets/images/clojure.png"},
@@ -59,6 +59,9 @@ var game = {
 		document.getElementById('guessedLetters').innerHTML = ''; //clear wrong guesses
 	},
 	newRound: function(){
+		//update display score
+		document.getElementById('scoreNumber').innerHTML = game.score	
+
 		// start a new word but continue game. Resets everything except score
 		this.reset('remaining');
 		this.reset('guessedWrong');
@@ -69,27 +72,10 @@ var game = {
 		wordDiv = ''; //clear variable holding the guesses
 		document.getElementById('remaining').innerHTML = ' '; //clear remaining attempt number
 		document.getElementById('guessedLetters').innerHTML = ' '; //clear wrong guesses
-		//!!FINISH THIS!! - add code to start up on a new word, take it from document.onkeyup function
-	}
-};
-//==END OF GLOBAL VARAIBLES==//
 
-
-//==START OF MAIN KEY PRESS FUNCTION==//
-// Wait for keyboard key to be pressed
-document.onkeyup = function(event){
-
-	//convert key player pressed to lower case so not case sensitive
-	var playerGuess = event.key.toLowerCase();
-	console.log('Pressed: ' + playerGuess);
-
-	//display score
-	document.getElementById('scoreNumber').innerHTML = game.score
-
-	//if no current word...
-	if(game.current === null){
 		// random generate number between 0 and 16, use as index from game.languageList, assign it to game.current
 		game.current =  game.languageList[ Math.floor(Math.random() * 17) ];
+
 		console.log( "Current Word: " + game.current.word);
 
 		//show photo hint for the word
@@ -102,9 +88,29 @@ document.onkeyup = function(event){
 
 		//populate word Div element
 		document.getElementById('word').innerHTML = wordDiv;
+
+	}
+};
+//==END OF GLOBAL VARAIBLES==//
+
+
+//==START OF MAIN KEY PRESS FUNCTION==//
+// Wait for keyboard key to be pressed
+document.onkeyup = function(event){
+
+	//convert key player pressed to lower case so it's not case sensitive
+	var playerGuess = event.key.toLowerCase();
+	console.log('Pressed: ' + playerGuess);
+
+	//display score
+	document.getElementById('scoreNumber').innerHTML = game.score
+
+	//if no current word...
+	if(game.current === null){
+		game.newRound();
 	}
 
-	//display remaing number guesses on site
+	//display remaing number of guesses remaining on website
 	document.getElementById('remaining').innerHTML = game.remaining
 
 	// if still have remaining guesses...
@@ -150,13 +156,12 @@ function incorrect(letter){
 		game.guessedWrong.push(letter);
 		
 		// update display in guessedLetters section of the website
-		document.getElementById('guessedLetters').innerHTML = game.guessedWrong
-		
+		document.getElementById('guessedLetters').innerHTML = game.guessedWrong;
 		// reduce remaining guesses by one
 		game.remaining--;
 
 		// update display in guessesRemaining section of the website
-		document.getElementById('remaining').innerHTML = game.remaining
+		document.getElementById('remaining').innerHTML = game.remaining;
 	}
 }
 
@@ -169,7 +174,7 @@ function correct(letter){
 		//loop through every index of game.current.word
 		for(var i=0; i < game.current.word.length; i++){
 
-			//if letter is equal to current index of game.current.word
+			//if letter is equal to current index of game.current.word...
 			if( letter === game.current.word[i]){
 				
 				//update document.getElementById(i).innerHTML for those indexes with letter
@@ -177,7 +182,7 @@ function correct(letter){
 
 				// add to guessedRight array
 				game.guessedRight.push(letter);
-				console.log(game.guessedRight);
+
 				//add to score
 				game.score++
 			}
